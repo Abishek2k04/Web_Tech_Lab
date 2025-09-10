@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Capitals of Countries</title>
+  <script>
+    function displayCapital() {
+      var country = document.forms["P5"].country.value;
+      var capital = "Please select any country"; // Default message
+
+      switch (country) {
+        case "india":
+          capital = "NEW DELHI";
+          break;
+        case "china":
+          capital = "BEIJING";
+          break;
+        case "pakistan":
+          capital = "ISLAMABAD";
+          break;
+        case "bangladesh":
+          capital = "DHAKA";
+          break;
+        case "japan":
+          capital = "TOKYO";
+          break;
+      }
+
+      document.getElementById("capt").textContent = capital;
+    }
+  </script>
+</head>
+<body onload="displayCapital()">
+  <form name="P5">
+    <center>
+      <h1>Select Form</h1>
+      <label for="country">Select a Country:</label>
+      <select name="country" id="country" onchange="displayCapital()">
+        <option value="select">--SELECT--</option>
+        <option value="india">INDIA</option>
+        <option value="china">CHINA</option>
+        <option value="pakistan">PAKISTAN</option>
+        <option value="bangladesh">BANGLADESH</option>
+        <option value="japan">JAPAN</option>
+      </select>
+    </center>
+    <br><br>
+    <h3 style="display:inline-block; color:black; font-size:18px;">Capital is: </h3>
+    <span id="capt" style="font-weight:bold; font-size:18px;"></span>
+  </form>
+</body>
+</html>
