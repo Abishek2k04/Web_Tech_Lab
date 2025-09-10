@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Books AJAX + XSLT</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { margin-bottom: 10px; color: #2a4d69; }
+        label { margin-right: 8px; }
+        table { border-collapse: collapse; width: 70%; margin-top: 15px; }
+        th, td { border: 1px solid #555; padding: 8px; text-align: left; }
+        th { background: #2a4d69; color: white; }
+        tr:nth-child(even) { background: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>Books by Category</h1>
+
+    <label for="category">Choose a category:</label>
+    <select id="category" onchange="loadBooks()">
+        <option value="all">All</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Non-Fiction">Non-Fiction</option>
+        <option value="Biography">Biography</option>
+    </select>
+
+    <div id="book-list">Loading...</div>
+
+    <script>
+        async function loadBooks() {
+            try {
+                const category = document.getElementById("category").value;
+
+                // Fetch XML and XSL
+                const [xmlResponse, xslResponse] = await Promise.all([
+                    fetch('books.xml'),
+                    fetch('books.xsl')
+                ]);
+
+                const xmlText = await xmlResponse.text();
+                const xslText = await xslResponse.text();
+
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                const xslDoc = parser.parseFromString(xslText, "text/xml");
+
+                // Apply XSLT
+                const xsltProcessor = new XSLTProcessor();
+                xsltProcessor.importStylesheet(xslDoc);
+                xsltProcessor.setParameter(null, "categoryFilter", category);
+
+                const resultDocument = xsltProcessor.transformToFragment(xmlDoc, document);
+
+                const bookList = document.getElementById("book-list");
+                bookList.innerHTML = "";
+                bookList.appendChild(resultDocument);
+
+            } catch (err) {
+                console.error("Error:", err);
+                document.getElementById("book-list").innerText = "Error loading books.";
+            }
+        }
+
+        // Load books when page starts
+        window.onload = loadBooks;
+    </script>
+</body>
+</html>

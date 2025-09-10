@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+<books>
+    <book category="Fiction">
+        <title>The Great Gatsby</title>
+        <author>F. Scott Fitzgerald</author>
+        <year>1925</year>
+        <price>10.99</price>
+    </book>
+    <book category="Non-Fiction">
+        <title>Sapiens</title>
+        <author>Yuval Noah Harari</author>
+        <year>2011</year>
+        <price>15.50</price>
+    </book>
+    <book category="Biography">
+        <title>The Story of My Life</title>
+        <author>Helen Keller</author>
+        <year>1903</year>
+        <price>12.75</price>
+    </book>
+</books>
