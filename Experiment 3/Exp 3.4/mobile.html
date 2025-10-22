@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mobile Validation</title>
+  <style>
+    body{font-family:Arial;margin:40px}
+    input,button{padding:8px;font-size:16px}
+    #result{font-weight:bold;margin-top:10px}
+  </style>
+</head>
+<body>
+  <h2>Check Mobile Number</h2>
+  <input id="mobile" maxlength="10" placeholder="Enter 10-digit number">
+  <button id="check">Check</button>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById("check").onclick = () => {
+      const num = document.getElementById("mobile").value.trim(),
+            res = document.getElementById("result"),
+            valid = /^[6-9]\d{9}$/.test(num);
+      res.textContent = valid ? "✅ Valid Mobile Number" : "❌ Invalid Mobile Number";
+      res.style.color = valid ? "green" : "red";
+    };
+  </script>
+</body>
+</html>

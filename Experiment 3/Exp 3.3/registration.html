@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <script>
+    function validateForm() {
+      const f = document.form1,
+            userId = f.userid.value.trim(),
+            pass = f.passid.value.trim(),
+            name = f.username.value.trim(),
+            email = f.email.value.trim(),
+            emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!userId || userId.length < 5 || userId.length > 12 || !/^\d+$/.test(userId))
+        return alert("User ID must be 5–12 digits"), f.userid.focus(), false;
+      if (!pass || pass.length < 7 || pass.length > 12)
+        return alert("Password must be 7–12 characters"), f.passid.focus(), false;
+      if (!name || !/^[A-Za-z\s]+$/.test(name))
+        return alert("Name must contain only letters and spaces"), f.username.focus(), false;
+      if (!email || !emailPattern.test(email))
+        return alert("Enter a valid email address"), f.email.focus(), false;
+
+      alert("Form Submitted Successfully!");
+      window.location.href = "success.html"; // redirect after success
+      return false; // prevent form submission reloading
+    }
+  </script>
+</head>
+<body>
+  <form name="form1" onsubmit="return validateForm()">
+    <table width="500" cellpadding="3">
+      <tr>
+        <td>User ID (Register Number)</td>
+        <td><input type="text" name="userid" maxlength="12" title="User ID must be 5–12 digits"></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="password" name="passid" maxlength="12" title="Password must be 7–12 characters"></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" name="username" title="Name must contain only letters and spaces"></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><input type="text" name="email" size="50"></td>
+      </tr>
+      <tr>
+        <td>About Yourself (optional)</td>
+        <td><textarea name="desc" rows="4" cols="40" placeholder="Tell us about yourself"></textarea></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>
